@@ -1,0 +1,1 @@
+{"491a91c5c4fa9c45925e745294a171ff":{"statistic":{"failed":1,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":1},"items":[{"uid":"64e169625f6f5a53","status":"failed","statusDetails":"Bu test bilerek fail oldu!","time":{"start":1752056963608,"stop":1752056966854,"duration":3246}}]}}

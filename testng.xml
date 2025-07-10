@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Allure Test Suite">
+
+    <!-- Allure ekran görüntüsü için listener -->
+    <listeners>
+        <listener class-name="insider.utilities.AllureReportListener$Listener"/>
+    </listeners>
+
+    <test name="Fail Screenshot Test">
+        <classes>
+            <class name="insider.tests.task.FailScreenshotTest"/>
+        </classes>
+    </test>
+
+</suite>

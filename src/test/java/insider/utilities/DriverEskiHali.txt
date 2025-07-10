@@ -1,0 +1,80 @@
+package insider.utilities;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+
+import java.time.Duration;
+
+public class Driver {
+    /*
+    Driver i her cagirdigimizda yeni bir pencere acmamasi icin if block ile ayarlama yaptik.
+    Yapmis oldugumuz ayarlamada if(driver==null) ile eger driver a deger atanmamis ise driver i baslat dedik.
+    Driver acik iken tekrar cagirilirsa if block calismayacagindan bu method mevcut driver i tekrar return edecek.
+    Boylece ayni driver uzerinden test senaryomuza devam edebilecegiz.
+     */
+
+    static WebDriver driver;
+
+    private Driver(){
+        /*
+        POM de driver classindaki getDriver methodunun object olusturularak kullanilmasini engellemek icin
+        Singleton Pattern kullanimi benimsenmistir.
+        Singleton Pattern (tekli kullanim): Bir classtan object olusturulmasini engelleyerek o classtan ozelliklere erisime
+        singleton yapariz. Bunu saglamak icin default constructor i private yapariz.
+         */
+    }
+
+    /*
+    Bir class'tan object olusturulmasini saglayan sey ozel method olan constructor' dir.
+
+     */
+    public static WebDriver getDriver(){
+        if(driver == null) {
+            //public frameworkumuzun her yerinden erisim icin,
+            //static bu class'tan her defa tekrar tekrar obje olusturarak degil sadece class ismi ile cagirabilmek icin,
+            //return type'ini WebDriver yaptik cunku bu method bize WebDriver dondurecek.
+            //name alanina ise alakali bir isim olan getDriver verdik anlamli olabilmesi icin.
+            switch ( ConfigReader.getProperty("browser")){
+                case  "chrome" :
+                    driver = new ChromeDriver();
+                    break;
+
+                case "edge" :
+                    driver = new EdgeDriver();
+                    break;
+
+                case "safari":
+                    driver = new SafariDriver();
+                    break;
+
+                case  "firefox":
+                    driver = new FirefoxDriver();
+                    break;
+
+                default:
+                    driver = new ChromeDriver();
+
+
+            }
+
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
+        return  driver;
+    }
+
+
+    public static void closeDriver(){
+        if(driver != null){
+            driver.close();
+            driver = null;
+        }
+    }
+
+
+
+}
